@@ -133,7 +133,7 @@
       flex-direction: column;
       gap: 10px;
       margin-top: 6px;
-      padding-bottom: 2px;
+      padding: 2px;
       overflow: hidden;
       transition: max-height 0.3s ease, opacity 0.25s ease;
     }
@@ -285,67 +285,7 @@
       <input type="text" class="search-input" placeholder="Cari link..." id="searchInput">
     </div>
 
-    <!-- Kategori 1: Marketplace -->
-    <div class="category">
-      <div class="category-header" onclick="toggleCategory(this)">
-        <span class="category-label">Marketplace</span>
-        <svg class="category-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-        </svg>
-      </div>
-      <div class="category-links">
-        <a href="https://shopee.co.id" target="_blank" class="link-btn" data-url="https://shopee.co.id">
-          Shopee
-          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
-          </button>
-        </a>
-        <a href="https://tokopedia.com" target="_blank" class="link-btn" data-url="https://tokopedia.com">
-          Tokopedia
-          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
-          </button>
-        </a>
-        <a href="https://tiktok.com" target="_blank" class="link-btn" data-url="https://tiktok.com">
-          TikTok Shop
-          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
-          </button>
-        </a>
-      </div>
-    </div>
-
-    <!-- Kategori 2: Dokumen Internal -->
-    <div class="category">
-      <div class="category-header" onclick="toggleCategory(this)">
-        <span class="category-label">Dokumen Internal</span>
-        <svg class="category-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-        </svg>
-      </div>
-      <div class="category-links">
-        <a href="https://docs.google.com" target="_blank" class="link-btn" data-url="https://docs.google.com">
-          Spreadsheet Katalog
-          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
-          </button>
-        </a>
-        <a href="https://drive.google.com" target="_blank" class="link-btn" data-url="https://drive.google.com">
-          Drive Naskah
-          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
-          </button>
-        </a>
-        <a href="https://docs.google.com" target="_blank" class="link-btn" data-url="https://docs.google.com">
-          Template Kontrak
-          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
-          </button>
-        </a>
-      </div>
-    </div>
-
-    <!-- Kategori 3: Tools -->
+    <!-- Kategori 1: Tools -->
     <div class="category">
       <div class="category-header" onclick="toggleCategory(this)">
         <span class="category-label">Tools</span>
@@ -354,20 +294,80 @@
         </svg>
       </div>
       <div class="category-links">
-        <a href="https://canva.com" target="_blank" class="link-btn" data-url="https://canva.com">
-          Canva
+        <a href="https://script.google.com/macros/s/AKfycbzry3fAbmOzNX0f2Y9EsKcyf5VIffH_JImW9Iate9ljldDQNyOFzJf3vDESL3xIgd14/exec" target="_blank" class="link-btn" data-url="https://script.google.com/macros/s/AKfycbzry3fAbmOzNX0f2Y9EsKcyf5VIffH_JImW9Iate9ljldDQNyOFzJf3vDESL3xIgd14/exec">
+          Invoice Maker
           <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
           </button>
         </a>
-        <a href="https://chatgpt.com" target="_blank" class="link-btn" data-url="https://chatgpt.com">
-          ChatGPT
+        <a href="https://script.google.com/macros/s/AKfycbxnvWx5b7WUU_eHDtgRDCF2YM2bmjqwy3fa_mDY1TkcfpoH-R-y4Bk4-R4zQQcGFoELLQ/exec" target="_blank" class="link-btn" data-url="https://script.google.com/macros/s/AKfycbxnvWx5b7WUU_eHDtgRDCF2YM2bmjqwy3fa_mDY1TkcfpoH-R-y4Bk4-R4zQQcGFoELLQ/exec">
+          Penawaran Cetak
           <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
           </button>
         </a>
-        <a href="https://claude.ai" target="_blank" class="link-btn" data-url="https://claude.ai">
-          Claude
+        <a href="#" target="_blank" class="link-btn" data-url="#">
+          Database Buku
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Kategori 2: Marketplace -->
+    <div class="category">
+      <div class="category-header" onclick="toggleCategory(this)">
+        <span class="category-label">Marketplace</span>
+        <svg class="category-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+        </svg>
+      </div>
+      <div class="category-links">
+        <a href="#" target="_blank" class="link-btn" data-url="#">
+          Shopee
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="#" target="_blank" class="link-btn" data-url="#">
+          Tokopedia
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="#" target="_blank" class="link-btn" data-url="#">
+          TikTok Shop
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Kategori 3: Dokumen Internal -->
+    <div class="category">
+      <div class="category-header" onclick="toggleCategory(this)">
+        <span class="category-label">Dokumen Internal</span>
+        <svg class="category-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+        </svg>
+      </div>
+      <div class="category-links">
+        <a href="#" target="_blank" class="link-btn" data-url="#">
+          Spreadsheet Katalog
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="#" target="_blank" class="link-btn" data-url="#">
+          Drive Naskah
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="#" target="_blank" class="link-btn" data-url="#">
+          Template Kontrak
           <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
           </button>
