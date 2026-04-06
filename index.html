@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alinea — Internal Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --border: #d4d4d4;
+      --border-hover: #1a1a1a;
+      --fill-hover: #1a1a1a;
+      --text-hover: #ffffff;
+      --accent: #3a3a3a;
+      --search-bg: #ffffff;
+      --toast-bg: #1a1a1a;
+      --toast-text: #ffffff;
+      --radius: 8px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem 4rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 460px;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo-wrap img {
+      height: 64px;
+      width: auto;
+    }
+
+    /* Search */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--search-bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-input:focus {
+      border-color: var(--border-hover);
+    }
+
+    /* Categories */
+    .category {
+      margin-bottom: 1.5rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 8px 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .category-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .category-chevron {
+      width: 18px;
+      height: 18px;
+      color: var(--text-secondary);
+      transition: transform 0.25s ease;
+    }
+
+    .category.collapsed .category-chevron {
+      transform: rotate(-90deg);
+    }
+
+    .category-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.25s ease;
+    }
+
+    .category.collapsed .category-links {
+      max-height: 0 !important;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    /* Link buttons */
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      padding: 14px 44px 14px 16px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .link-btn:hover,
+    .link-btn:focus-visible {
+      background: var(--fill-hover);
+      color: var(--text-hover);
+      border-color: var(--fill-hover);
+    }
+
+    .link-btn:hover .copy-btn,
+    .link-btn:focus-visible .copy-btn {
+      color: var(--text-hover);
+      opacity: 0.7;
+    }
+
+    .link-btn.hidden {
+      display: none;
+    }
+
+    /* Copy button */
+    .copy-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      color: var(--text-secondary);
+      opacity: 0.5;
+      transition: opacity 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .copy-btn:hover {
+      opacity: 1 !important;
+    }
+
+    .copy-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      padding: 2rem 0;
+      display: none;
+    }
+
+    .no-results.visible {
+      display: block;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--toast-bg);
+      color: var(--toast-text);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 100px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Fade in animation */
+    .container > * {
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .container > *:nth-child(1) { animation-delay: 0s; }
+    .container > *:nth-child(2) { animation-delay: 0.05s; }
+    .container > *:nth-child(3) { animation-delay: 0.1s; }
+    .container > *:nth-child(4) { animation-delay: 0.15s; }
+    .container > *:nth-child(5) { animation-delay: 0.2s; }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <img src="logo.svg" alt="Penerbit Alinea">
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+      </svg>
+      <input type="text" class="search-input" placeholder="Cari link..." id="searchInput">
+    </div>
+
+    <!-- Kategori 1: Marketplace -->
+    <div class="category">
+      <div class="category-header" onclick="toggleCategory(this)">
+        <span class="category-label">Marketplace</span>
+        <svg class="category-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+        </svg>
+      </div>
+      <div class="category-links">
+        <a href="https://shopee.co.id" target="_blank" class="link-btn" data-url="https://shopee.co.id">
+          Shopee
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="https://tokopedia.com" target="_blank" class="link-btn" data-url="https://tokopedia.com">
+          Tokopedia
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="link-btn" data-url="https://tiktok.com">
+          TikTok Shop
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Kategori 2: Dokumen Internal -->
+    <div class="category">
+      <div class="category-header" onclick="toggleCategory(this)">
+        <span class="category-label">Dokumen Internal</span>
+        <svg class="category-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+        </svg>
+      </div>
+      <div class="category-links">
+        <a href="https://docs.google.com" target="_blank" class="link-btn" data-url="https://docs.google.com">
+          Spreadsheet Katalog
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="link-btn" data-url="https://drive.google.com">
+          Drive Naskah
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="https://docs.google.com" target="_blank" class="link-btn" data-url="https://docs.google.com">
+          Template Kontrak
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Kategori 3: Tools -->
+    <div class="category">
+      <div class="category-header" onclick="toggleCategory(this)">
+        <span class="category-label">Tools</span>
+        <svg class="category-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+        </svg>
+      </div>
+      <div class="category-links">
+        <a href="https://canva.com" target="_blank" class="link-btn" data-url="https://canva.com">
+          Canva
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="https://chatgpt.com" target="_blank" class="link-btn" data-url="https://chatgpt.com">
+          ChatGPT
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+        <a href="https://claude.ai" target="_blank" class="link-btn" data-url="https://claude.ai">
+          Claude
+          <button class="copy-btn" onclick="copyLink(event, this)" title="Salin link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m0 0a9.06 9.06 0 0 1 1.5.124m-1.5-.124H6.75"/></svg>
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <!-- No results message -->
+    <div class="no-results" id="noResults">Tidak ada link yang cocok.</div>
+
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">Link disalin!</div>
+
+  <script>
+    // Toggle collapse/expand
+    function toggleCategory(header) {
+      const category = header.parentElement;
+      const links = category.querySelector('.category-links');
+
+      if (category.classList.contains('collapsed')) {
+        // Expand
+        category.classList.remove('collapsed');
+        links.style.maxHeight = links.scrollHeight + 'px';
+        links.style.opacity = '1';
+      } else {
+        // Collapse
+        links.style.maxHeight = links.scrollHeight + 'px';
+        // Force reflow
+        links.offsetHeight;
+        category.classList.add('collapsed');
+      }
+    }
+
+    // Initialize max-height for smooth animation
+    document.querySelectorAll('.category-links').forEach(el => {
+      el.style.maxHeight = el.scrollHeight + 'px';
+      el.style.opacity = '1';
+    });
+
+    // Search/filter
+    const searchInput = document.getElementById('searchInput');
+    const noResults = document.getElementById('noResults');
+
+    searchInput.addEventListener('input', function () {
+      const query = this.value.toLowerCase().trim();
+      const categories = document.querySelectorAll('.category');
+      let totalVisible = 0;
+
+      categories.forEach(cat => {
+        const links = cat.querySelectorAll('.link-btn');
+        let catVisible = 0;
+
+        links.forEach(link => {
+          const text = link.textContent.toLowerCase();
+          if (!query || text.includes(query)) {
+            link.classList.remove('hidden');
+            catVisible++;
+          } else {
+            link.classList.add('hidden');
+          }
+        });
+
+        // Hide entire category if no links match
+        if (catVisible === 0 && query) {
+          cat.style.display = 'none';
+        } else {
+          cat.style.display = 'block';
+          // Auto-expand if searching
+          if (query && cat.classList.contains('collapsed')) {
+            cat.classList.remove('collapsed');
+            const linksWrap = cat.querySelector('.category-links');
+            linksWrap.style.maxHeight = linksWrap.scrollHeight + 'px';
+            linksWrap.style.opacity = '1';
+          }
+        }
+
+        totalVisible += catVisible;
+      });
+
+      noResults.classList.toggle('visible', totalVisible === 0 && query);
+    });
+
+    // Copy link to clipboard
+    function copyLink(event, btn) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const url = btn.parentElement.getAttribute('data-url');
+
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Link disalin!');
+      }).catch(() => {
+        // Fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = url;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast('Link disalin!');
+      });
+    }
+
+    // Toast notification
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
